@@ -1,0 +1,27 @@
+.column {
+  float: left;
+  width: 400px;
+  padding: 0 10px;
+  display: flex;
+  font-size: 50px;
+  justify-content: space-around;
+  
+  }
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 50px;
+    }
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row2 {margin: 0 -100px;}
+  
+  /* Clear floats after the columns */
+  .row2:after {
+    content: "";
+    display: table;
+    clear: both;
+    
+  }  
