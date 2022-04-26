@@ -3,44 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { render } from "react-dom";
-import ContDash from './components/backOfiice/ContDash';
-import Home from './components/Layout/Home/Home';
-import AddStudent from './components/Students/AddStudent/AddStudent';
-import EditStudent from './components/Students/EditStudent/EditStudent';
-
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-// c1
-
-// c2
-
-
+import ContDash from "./Backoffice/ContDash"
+import DataProvider from "./redux/store"
+import AdminDash from './Backoffice/AdminDash';
 ReactDOM.render(
-  <BrowserRouter>
-  <Routes>
-  <Route exact path="/student" element={ <Home />}  />
-  <Route exact path="/add" element={<AddStudent />} />
-  <Route exact path="/edit/:id" element={<EditStudent />} />
-
-  <Route  exact path="/admin" element={<ContDash />} />
-    <Route exact path="/" element={<App />} />
-   
-  </Routes>
-</BrowserRouter>,
+  <React.StrictMode>
+    <DataProvider>
+    <App />
+    </DataProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
-
-
-
-
-
-
-/*  c3  */
-
-
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
