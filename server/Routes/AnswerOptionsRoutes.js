@@ -3,6 +3,7 @@ const router = express.Router();
 const QuestionSchema = require ('../models/Question');
 // Student model
 const answerOptionses = require('../models/answerOptions');
+const project_score = require('../models/Project_score');
 
 router.get('/testt1',async (req,res)=>
 {
@@ -177,14 +178,22 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const removeanswerOptions = await answerOptionses.findByIdAndRemove(req.params.id);
-     res.send({ message: 'The student was removed' });
+     res.send({ message: 'The answers was removed' });
   } catch(err) {
     res.status(400).send({ error: err });
   }
 }); 
 
 
+router.post('/scoreProject', async (req, res) => {
+  try {
+    const scoreProject= await project_score.create({soner_key: req.body.soner_key, chatbot:req.body.chatbot, vote: req.body.vote });
+     res.send({ scoreProject });
+  } catch(err) {
+    res.status(400).send({ error: err });
+  }
 
+});
 
 
 module.exports = router;

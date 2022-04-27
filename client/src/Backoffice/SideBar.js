@@ -60,6 +60,24 @@ return (<aside className="sidenav navbar navbar-vertical navbar-expand-xs border
         <span className="nav-link-text ms-1">Teacher</span>
       </a>
     </li>
+
+  <li className="nav-item">
+      <a className="nav-link text-white " href="question">
+        <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
+          <i className="material-icons opacity-10">format_textdirection_r_to_l</i>
+        </div>
+        <span className="nav-link-text ms-1">Question</span>
+      </a>
+    </li>
+      <li className="nav-item">
+      <a className="nav-link text-white " href="answerOptions">
+        <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
+          <i className="material-icons opacity-10">format_textdirection_r_to_l</i>
+        </div>
+        <span className="nav-link-text ms-1">answerOptions</span>
+      </a>
+    </li>
+
     <li className="nav-item">
       <a className="nav-link text-white " href="projectsA">
         <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">

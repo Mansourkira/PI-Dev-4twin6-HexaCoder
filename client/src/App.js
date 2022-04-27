@@ -49,6 +49,7 @@ import AddQuestion from './Layout/Add/AddQuestion';
 import AddAnswerOptions from './Layout/Add/AddAnswer';
 import EditQuestion from './Layout/Edit/EditQuestion';
 import EditAnswerOptions from './Layout/Edit/EditAnswer';
+import Quiz from './quiz/Quiz';
 
 function App() {
   const dispatch = useDispatch();
@@ -111,7 +112,7 @@ function App() {
      
       <BrowserRouter>
         <div className='App'>
-           <Header/>
+          
            <Body/>
           <Route path='/BackofficeTeacher' element={<ContDash />} ><ContDash/></Route>
           <Route path='/vote' element={<VotingInterface />}><VotingInterface/></Route>
@@ -165,7 +166,7 @@ function App() {
 <Route path="/edit/team/:id" element={<EditTeam/>}exact><EditTeam/></Route>
 
 <Route path="/view/team/:id" element={<ShowTeam/>}exact><ShowTeam/></Route>
-
+<Route path="/quiz" element={<Quiz/>}exact><Quiz/></Route>
 
 
 

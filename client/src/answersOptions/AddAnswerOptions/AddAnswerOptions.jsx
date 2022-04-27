@@ -9,7 +9,7 @@ import Footer from '../../Backoffice/footer';
 import { Link } from "react-router-dom";
 export default function AddStudent(){
 
-  const [student , SetStudent] = useState({answerText : '',isCorrect:false,questions:null,__v:0});
+  const [student , SetStudent] = useState({answerText : '',isCorrect:false,questions:null});
   const [classes , SetClasses] = useState([{questionText:"",class:"",_id:""}]);
 const isCor=[true,false];
   
@@ -55,11 +55,11 @@ const isCor=[true,false];
 
       <div>
           <div className="AddStudent-Wrapper">
-        <h1>Add Student:</h1>
+        <h1>Add AnswerText:</h1>
           <label htmlFor="name">answerText:</label>
           <input
             type="text"
-            placeholder="Enter the name of the students here"
+            placeholder="Enter the anwers option here"
             value={student.answerText} onChange={e =>SetStudent({...student,answerText:e.target.value})}
             className="Add-Student-Input"
             required
@@ -106,7 +106,7 @@ const isCor=[true,false];
 
 
 
-                 <label htmlFor="classes">Class</label>
+                 <label htmlFor="classes">Question</label>
                  <select  className="Add-Student-Input"required id="lang" style={{marginBottom:30}} >
                  {
                   classes.map(obj=>(

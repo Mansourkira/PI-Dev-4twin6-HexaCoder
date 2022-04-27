@@ -113,7 +113,7 @@ class HomeAnswers extends Component {
         <h1>answerOptions:</h1>
         <SearchanswerOptions searchanswerOptions={this.searchanswerOptions} />
         <div style={{display:"flex"}}> 
-        <Link to="/add" exact>
+        <Link to="/addAnswerOptions" exact>
         <button  className="btn btn-success" style={{justifyContent : "flex-end"}}>Add answerOptions</button>
         </Link>
         </div>
