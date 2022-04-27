@@ -10,12 +10,16 @@ router.get('/',async (req,res)=>
 {
     try {
         const classes = await ClassSchema.find({});
+        
         res.send({classes})
     }
     catch(err) {
         res.status(400).send({ error: err });
       }
 })
+
+
+// get class By id
 router.get('/:id', async (req, res) => {
   try {
     const classe = await ClassSchema.findById(req.params.id);
@@ -35,5 +39,20 @@ router.post('/', async (req, res) => {
     }
   
   });
-  
+
+
+  //update
+
+  router.put('/update/:id', async (req, res) => {
+    try {
+      const updateClass = await ClassSchema.findByIdAndUpdate(req.params.id, req.body);
+       res.send({ message: 'The Class was updated' });
+    } catch(err) {
+      res.status(400).send({ error: err });
+    }
+  });
+
+
+// Get Classes
+//router.get('/')
  module.exports =router

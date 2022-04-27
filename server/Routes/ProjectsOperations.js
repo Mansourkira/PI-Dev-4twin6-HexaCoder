@@ -2,10 +2,10 @@ const express=require('express');
 var url = "mongodb+srv://ahmed:ahmed@cluster0.iaanx.mongodb.net/BackendServer?retryWrites=true&w=majority";
 const Route = express.Router();
 const voteblock= require("../Models/Vote")
-const teacher=require('../Models/Teacher')
+const teacher=require('../Models/Teachers')
 const Projects=require("../Models/Project");
 const Students = require('../models/Student');
-const Team = require("../Models/Team")
+const Team = require("../Models/TeamSchema")
 var mongoose= require('mongoose');
 const cors= require('cors')
 var nodemailer = require('nodemailer');
@@ -105,23 +105,6 @@ Route.put('/editproject',(req,res)=>{
           }
       })
   })
-Route.get('/getnonaffectedTeams',(req,res)=>{
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  Team.aggregate([{$lookup: {
-   from: "projects",
-   localField: "_id",
-   foreignField: "team",
-   as: "Project"
-}}],function(err,docs){
-   if(err)
-   res.send(err)
-   else 
-   {
-     z=docs.filter(x=>x.Project.length==0)
-   res.send(z)
-   }
- }) 
-})
 Route.get('/findAll',(req,res)=>{
   
     
@@ -156,33 +139,7 @@ Route.put('/GetProjectByStudent/:id/:vid',(req,res)=>{
  //res.send(docs[0]._id)
 }})
 })
-Route.get('/GetProject/:id',(req,res)=>{
- 
-  res.header("Access-Control-Allow-Origin", "*");
-  
-  Team.find({ "membres" : { $in: req.params.id } },(err,docs)=>{
-   if(err) res.send(err)
-  
-    
-     else{
-     console.log(docs)
-     if(docs.length==0)
-     {
-       res.send(docs)
-     }
-     else{
-     Projects.find({"team":docs[0]._id},(err,docs)=>{
-       if(err) res.send(err)
-       else{  
-      
-        
-        res.send(docs)
-       
-     }})}
-    
-  //res.send(docs[0]._id)
- }})
- })
+
 Route.get('/getTeachers',(req,res)=>{
   
   mongoose.connect(url).then((ans) => {
@@ -198,18 +155,25 @@ Route.get('/getTeachers',(req,res)=>{
             res.send(err)
         }
         else 
-        {
-          if(docs.length==0)
-          {
-            res.send("")
-          }
-          else{
           res.send(docs)
-    }}})
+    })
 
 })
 
-
+Route.post('/addTeacher',(req,res)=>{
+ 
+ teacher.create({
+  firstName:req.body.firstName,
+  lastName:req.body.lastName,
+  email : req.body.email,
+  password : req.body.password,
+  avatar:req.body.avatar,
+ },function(err,docs){
+   if(err) res.send(err)
+   else 
+   res.send(docs)
+ })
+})
 function mailing(to)
 {
 var transporter = nodemailer.createTransport({
@@ -242,11 +206,10 @@ Team.find({_id:req.params.id},(err,docs)=>{
   else{
    // res.send(docs[0].membres)
      // 
-      console.log(docs[0].membres[0])
-      Students.find({_id:docs[0].membres[0]},(err,docs)=>{
+      console.log(docs[0].membres[3])
+      Students.find({_id:docs[0].membres[3]},(err,docs)=>{
         if(err) res.send(err)
         else{
-          if(docs.length==0){res.send("**")}
           console.log(docs)
           mailing(docs[0].email)
           res.send("sent")

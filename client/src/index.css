@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+/* --------------- Header ----------------- */
+@import url("./components//header/header.css");
+
+/* -------------- Auth ---------------- */
+@import url("./components/body/auth/auth.css");
+
+/* ------------- Profile -------------- */
+@import url("./components//body/profile/profile.css");
+/* ---------------- Not Found -------------- */
+@import url("./components/utils/NotFound/notfound.css");

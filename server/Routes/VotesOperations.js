@@ -15,8 +15,7 @@ const { initializeApp } = require('firebase-admin/app');
 var serviceAccount = require("./projecttryout-6b99f-firebase-adminsdk-1hfoy-db64bfcf27.json");
 const { MD5 } = require('crypto-js');
 const { Alert } = require('react-native-web');
-const md5 = require('md5');
-/*admin.initializeApp({
+admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     // The database URL depends on the location of the database
     databaseURL: "https://projecttryout-6b99f-default-rtdb.firebaseio.com"
@@ -25,7 +24,7 @@ const md5 = require('md5');
   // As an admin, the app has access to read and write all data, regardless of Security Rules
   var db = admin.database();
   var PollsRef=db.ref("polls");
-  console.log(db)*/
+  console.log(db)
 class Block{
     constructor(transactions,timestamp,previousHash="",hash="")
     {
@@ -138,8 +137,7 @@ Route.post('/addvotes',async(req,res)=>{
       res.header("Access-Control-Allow-Origin", "http://localhost:3000");
       voteblock.find({},function (err, docs1) {
        let block=docs1[docs1.length-1];
-      // console.log("transaction.0="+block.transactions[0])
-       const x = docs1.filter(x=>x.transactions[0]==req.body.transactions[0])''
+       const x = docs1.filter(x=>x.transactions[0]==req.body.transactions[0])
        console.log("result=>"+x)
         if((docs1.length==0))
         {
@@ -174,7 +172,13 @@ Route.post('/addvotes',async(req,res)=>{
               console.log(err)
             
         }
-       
+        if(x.length==0){
+        PollsRef.push().set({
+          transactions:req.body.transactions,
+          timestamp:Date(Date.now()).toString(),
+          previousHash:block.hash,
+          hash:block1.hash
+      });}
     /*  else {
         PollsRef.push().set({
           transactions:req.body.transactions,
@@ -185,28 +189,6 @@ Route.post('/addvotes',async(req,res)=>{
       console.log("new Block=>"+block)
         res.send(block)
        } )          
-})
-
-Route.get('/isblockchainvalid',(req,res)=>{
-  voteblock.find({},(err,docs)=>{
-    if(err) res.send(err)
-    else 
-    {
-      let counter=1;
-      for(let i=0;i<docs.length-1;i++)
-      {
-            if(docs[i].hash==docs[i+1].previousHash)
-            {
-              counter=counter+1  
-            }
-            else {
-              res.send("this is not a valid blockchain")
-            }
-      }
-      if(counter==docs.length)
-       {res.send(docs)}
-    }
-  })
 })
 
 module.exports=Route

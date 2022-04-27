@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 
 const ClassSchema = new mongoose.Schema({
 ClassName : String,
+questions: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'Questions' }
+  ]
 
 
-membres : [{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Student'
-}]
 }, {
     timestamps: true
   });
