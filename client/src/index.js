@@ -1,40 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { render } from "react-dom";
-import ContDash from './components/backOfiice/ContDash';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-// c1
-import Invoices from './components/Invoices'
-import Footer from './components/backOfiice/footer';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-// c2
-
+import DataProvider from "./redux/store";
 
 ReactDOM.render(
-  <BrowserRouter>
-  <Routes>
-  <Route  exact path="/admin" element={<ContDash />} />
-    <Route path="/" element={<App />} />
-   
-  </Routes>
-</BrowserRouter>,
-  document.getElementById('root')
+  <React.StrictMode>
+    <DataProvider>
+      <App />
+    </DataProvider>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
 
-
-
-
-
-
-
-/*  c3  */
-
-
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

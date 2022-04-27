@@ -1,34 +1,24 @@
-const mongoose = require('mongoose');
-const Teacher = require('./Teacher');
+const mongoose = require("mongoose");
+
 const projectSchema = new mongoose.Schema({
-project_name:String,
-project_option:Sting,
-project_link:String,
-date_of_creation:Date,
-logo:String,
-Marketing:String,       
-description:String,
+  project_name: String,
+  project_theme: String,
+  project_option: String,
+  project_link: String,
 
-
-
-
-// One to Many [Project To Teacher]
-teacher:{
-    type:mongoose.Schema.type.ObjectId,
-    ref:'Teacher'
-},
-
-// One To One [Project to Team ]
-team: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Team' 
+  // One To One [Project to Team ]
+  team: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Team",
   },
-theme:{
-  type:mongoose.Schema.Types.ObjectId,
-  ref:'Theme'
-}
-
-}, {
-  timestamps: true
+  date_of_creation: Date,
+  state_qualified: Boolean,
+  teacher: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Teachers",
+  },
+  logo: String,
+  Marketing: String,
+  description: String,
 });
-module.exports=mongoose.model('Project',projectSchema)
+//module.exports = mongoose.model("projects", projectSchema);

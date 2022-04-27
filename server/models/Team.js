@@ -1,27 +1,27 @@
-const mongoose = require('mongoose');
-const TeamSchema = new mongoose.Schema({
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
+mongoose.Promise = global.Promise;
+const TeamSchema = new Schema(
+  {
+    team_Name: String,
 
-team_Name:String,
+    // One To Many [Team to Student]
+    membres: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Student",
+      },
+    ],
 
-
-// One To Many [Team to Student]
-membre:[
-    {
-        type:mongoose.Schema.Types.ObjectId,ref:'Student'
+    // One To One [Team To Project]
+    project: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "projects",
     },
-],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-
-// One To One [Team To Project]
-project:{
-    type:mongoose.Schema.Types.ObjectId,ref:'Project'
-}
-}, {
-    timestamps: true
-  });
-  
-
-
-
-module.exports=mongoose.model('Team',TeamSchema)
-
+module.exports = mongoose.models.Team || mongoose.model("Team", TeamSchema);
